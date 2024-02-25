@@ -1,8 +1,8 @@
 import '../styles/App.css';
-import Header from './Header';
 import { useState } from 'react';
-// import Summary from './Summary';
-// import Qualifications from './Qualifications';
+import Header from './Header';
+import Summary from './Summary';
+import Qualifications from './Qualifications';
 // import Education from './Education';
 // import Experience from './Experience';
 
@@ -10,6 +10,7 @@ export default function App() {
 	const [person, setPerson] = useState({
 		name: 'Everett Smith',
 		email: 'everettsmith@email.com',
+		phone: '123-456-7890',
 		city: 'Seattle',
 		state: 'WA',
 		zipcode: '12345',
@@ -64,10 +65,10 @@ Hey there, I'm Alex, and I'm absolutely fascinated by web development. The blend
 	return (
 		<>
 			<Header person={person} />
-			{/* <Summary />
-			<Qualifications />
-			<Education />
-			<Experience /> */}
+			<Summary person={person} />
+			<Qualifications person={person} />
+			{/* <Education /> */}
+			{/* <Experience /> */}
 		</>
 	);
 }
