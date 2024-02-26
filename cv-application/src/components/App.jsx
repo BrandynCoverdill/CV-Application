@@ -1,6 +1,6 @@
 import '../styles/App.css';
-import {v4 as uuidv4} from 'uuid';
-import {useState} from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import { useState } from 'react';
 import Header from './Header';
 import Summary from './Summary';
 import Qualifications from './Qualifications';
