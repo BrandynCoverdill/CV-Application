@@ -6,6 +6,7 @@ import Summary from './Summary';
 import Qualifications from './Qualifications';
 import Education from './Education';
 import Experience from './Experience';
+import Button from './Button';
 
 export default function App() {
 	const [person, setPerson] = useState({
@@ -65,6 +66,20 @@ Hey there, I'm Everett, and I'm absolutely fascinated by web development. The bl
 		},
 	]);
 
+	const [isEditing, setIsEditing] = useState(false);
+
+	function handleEdit(e) {
+		setIsEditing(true);
+	}
+
+	function handleSave(e) {
+		setIsEditing(false);
+	}
+
+	function handleCancel(e) {
+		setIsEditing(false);
+	}
+
 	return (
 		<>
 			<Header person={person} />
@@ -72,6 +87,16 @@ Hey there, I'm Everett, and I'm absolutely fascinated by web development. The bl
 			<Qualifications person={person} />
 			<Education school={school} />
 			<Experience work={work} />
+			<section className='buttons'>
+				{!isEditing ? (
+					<Button handleClick={handleEdit}>Edit</Button>
+				) : (
+					<>
+						<Button handleClick={handleSave}>Save</Button>
+						<Button handleClick={handleCancel}>Cancel</Button>
+					</>
+				)}
+			</section>
 		</>
 	);
 }

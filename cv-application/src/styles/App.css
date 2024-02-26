@@ -13,3 +13,10 @@
 body {
 	padding: 1em;
 }
+
+.buttons {
+	display: flex;
+	justify-content: end;
+	gap: 0.5em;
+	margin-block-start: 1em;
+}
