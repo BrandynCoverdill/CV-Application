@@ -9,10 +9,10 @@ export default function Qualifications({ person, isEditing }) {
 				<ul>
 					{person.qualifications.map((qualification) => {
 						return (
-							<>
+							<div className='editList'>
 								<input type='text' placeholder='Qualification' />
 								<button className='deleteBtn'>Delete</button>
-							</>
+							</div>
 						);
 					})}
 					<button className='addBtn'>Add new Qualification</button>
