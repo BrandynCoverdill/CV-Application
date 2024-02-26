@@ -23,6 +23,32 @@
 	margin-inline-start: 1em;
 }
 
+.qualificationsEdit {
+	display: flex;
+	flex-wrap: nowrap;
+	gap: 1em;
+	margin-top: 0.5em;
+	padding-block-end: 0.5em;
+	border-bottom: 3px solid black;
+}
+
+.qualificationsEdit h2 {
+	min-width: 30%;
+	text-align: center;
+}
+
+.qualificationsEdit .deleteBtn {
+	margin-inline: 0.5em;
+}
+
+.qualificationsEdit ul input {
+	margin-block: 0.5em;
+}
+
+.qualificationsEdit .addBtn {
+	margin-block-start: 0.5em;
+}
+
 @media screen and (max-width: 700px) {
 	.qualifications {
 		flex-direction: column;
