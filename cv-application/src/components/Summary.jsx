@@ -1,6 +1,6 @@
 import '../styles/Summary.css';
 
-export default function Summary({ person }) {
+export default function Summary({ person, isEditing }) {
 	return (
 		<section className='summary'>
 			<h2>Summary Statement</h2>

@@ -13,7 +13,16 @@
 	justify-content: space-around;
 	gap: 0.5em;
 	padding-block: 0.5em;
-	max-width: 800px;
+}
+
+.border {
+	border-bottom: 3px solid black;
+	padding-bottom: 0.5em;
+	width: 100%;
+}
+
+.header #nameInput {
+	width: 100%;
 }
 
 @media screen and (max-width: 350px) {
@@ -24,5 +33,17 @@
 
 	.header div > * {
 		width: fit-content;
+	}
+}
+
+@media screen and (max-width: 450px) {
+	.header-edit {
+		display: flex;
+		flex-direction: column;
+		text-align: center;
+	}
+
+	.header input {
+		margin: 0.1em;
 	}
 }

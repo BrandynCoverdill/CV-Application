@@ -1,6 +1,6 @@
 import '../styles/Experience.css';
 
-export default function Experience({ work }) {
+export default function Experience({ work, isEditing }) {
 	return (
 		<section className='experience'>
 			<h2>Work Experience</h2>
@@ -10,7 +10,9 @@ export default function Experience({ work }) {
 						<p>
 							{w.startDate} - {w.endDate}
 						</p>
-						<p>{w.companyTitle}</p>
+						<p>
+							<b>{w.companyTitle}</b>
+						</p>
 						<p>
 							{w.companyName} - {w.companyCity}, {w.companyState}
 						</p>

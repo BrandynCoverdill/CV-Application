@@ -82,11 +82,11 @@ Hey there, I'm Everett, and I'm absolutely fascinated by web development. The bl
 
 	return (
 		<>
-			<Header person={person} />
-			<Summary person={person} />
-			<Qualifications person={person} />
-			<Education school={school} />
-			<Experience work={work} />
+			<Header person={person} isEditing={isEditing} />
+			<Summary person={person} isEditing={isEditing} />
+			<Qualifications person={person} isEditing={isEditing} />
+			<Education school={school} isEditing={isEditing} />
+			<Experience work={work} isEditing={isEditing} />
 			<section className='buttons'>
 				{!isEditing ? (
 					<Button handleClick={handleEdit}>Edit</Button>
