@@ -14,7 +14,9 @@ export default function Qualifications({person, isEditing}) {
 							</div>
 						);
 					})}
-					<button className='addBtn'>Add new Qualification</button>
+					<div className='buttons'>
+						<button className='addBtn'>Add new Qualification</button>
+					</div>
 				</ul>
 			</section>
 		);

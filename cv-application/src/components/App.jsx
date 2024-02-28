@@ -90,19 +90,37 @@ export default function App() {
 	const [work, setWork] = useState([
 		{
 			key: uuidv4(),
-			startDate: '2018',
+			startDate: 2018,
 			endDate: 'Current',
 			companyTitle: 'Software Engineer',
 			companyName: 'Bing',
 			companyCity: 'Bellevue',
 			companyState: 'WA',
 			duties: [
-				'Maintain software functionality',
-				'Executing full lifecycle software development',
-				'Design software',
-				'Collaborating team working skills',
-				'Analyzing and modifying existing software',
-				'Investigate new technologies',
+				{
+					key: uuidv4(),
+					title: 'Maintain software functionality',
+				},
+				{
+					key: uuidv4(),
+					title: 'Executing full lifecycle software development',
+				},
+				{
+					key: uuidv4(),
+					title: 'Design software',
+				},
+				{
+					key: uuidv4(),
+					title: 'Collaborating team working skills',
+				},
+				{
+					key: uuidv4(),
+					title: 'Analyzing and modifying existing software',
+				},
+				{
+					key: uuidv4(),
+					title: 'Investigate new technologies',
+				},
 			],
 		},
 	]);
