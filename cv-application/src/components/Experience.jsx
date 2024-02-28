@@ -8,7 +8,6 @@ export default function Experience({
 	isEditing,
 	handleYearStartChange,
 	handleYearEndChange,
-	handleCheckboxChange,
 	handleCompanyTitleChange,
 	handleCompanyNameChange,
 	handleCompanyCityChange,
@@ -19,17 +18,6 @@ export default function Experience({
 	handleAddJobDuty,
 	handleAddJob,
 }) {
-	function handleCurrentlyWorkChange(e, id) {
-		const btn = document.querySelector('input[type="checkbox"]');
-		const isChecked = btn.hasAttribute('checked');
-		if (!isChecked) {
-			btn.setAttribute('checked', 'true');
-		} else {
-			btn.removeAttribute('checked');
-		}
-		handleCheckboxChange(isChecked, e, id);
-	}
-
 	if (isEditing) {
 		return (
 			<section className='experienceEdit'>
@@ -50,44 +38,14 @@ export default function Experience({
 							</div>
 							<div>
 								<label htmlFor='yearEndedInput'>Year Ended: </label>
-								{w.endDate === 'Current' ? (
-									<>
-										<input
-											type='number'
-											min={1900}
-											placeholder='2020'
-											id='yearEndedInput'
-											disabled
-											onChange={(e) => handleYearEndChange(e, w.key)}
-										/>
-										<input
-											type='checkbox'
-											id='currentlyWorking'
-											name='currentlyWorking'
-											value='Current'
-											onChange={handleCurrentlyWorkChange}
-										/>
-									</>
-								) : (
-									<>
-										<input
-											type='number'
-											min={1900}
-											placeholder='2020'
-											id='yearEndedInput'
-											value={w.endDate}
-											onChange={(e) => handleYearEndChange(e, w.key)}
-										/>
-										<input
-											type='checkbox'
-											id='currentlyWorking'
-											name='currentlyWorking'
-											value='Current'
-											onChange={(e) => handleCurrentlyWorkChange(e, w.key)}
-										/>
-									</>
-								)}
-								<label htmlFor='currentlyWorking'>I currently work here</label>
+								<input
+									type='number'
+									min='1900'
+									placeholder='2020'
+									id='yearEndedInput'
+									value={w.endDate}
+									onChange={(e) => handleYearEndChange(e, w.key)}
+								/>
 							</div>
 							<div>
 								<label htmlFor='companyTitleInput'>Title at Company: </label>

@@ -91,7 +91,7 @@ export default function App() {
 		{
 			key: uuidv4(),
 			startDate: 2018,
-			endDate: 'Current',
+			endDate: '2024',
 			companyTitle: 'Software Engineer',
 			companyName: 'Bing',
 			companyCity: 'Bellevue',
@@ -300,10 +300,7 @@ export default function App() {
 	}
 
 	function handleYearEndChange(e, id) {
-		let year = e.target.value;
-		if (document.querySelector('#currentlyWorking').hasAttribute('checked')) {
-			year = 'Current';
-		}
+		const year = e.target.value;
 		const updatedWork = editWork.filter((work) => {
 			if (work.key === id) {
 				work.endDate = year;
@@ -312,36 +309,6 @@ export default function App() {
 			return work;
 		});
 		setEditWork([...updatedWork]);
-		console.log(editWork);
-	}
-
-	function handleCheckboxChange(isChecked, id) {
-		// TODO: Make the checkbox checked if end date is "current" is selected on initial render.
-		const currentYear = new Date().getFullYear();
-		const yearEndInput = document.querySelector('#yearEndedInput');
-		if (!isChecked) {
-			yearEndInput.setAttribute('disabled', 'true');
-			setEditWork(
-				editWork.filter((work) => {
-					if (work.key === id) {
-						work.endDate = 'Current';
-						return work;
-					}
-					return work;
-				})
-			);
-		} else {
-			yearEndInput.removeAttribute('disabled');
-			setEditWork(
-				editWork.filter((work) => {
-					if (work.key === id) {
-						work.endDate = currentYear;
-						return work;
-					}
-					return work;
-				})
-			);
-		}
 	}
 
 	function handleCompanyTitleChange(e, id) {
@@ -507,7 +474,6 @@ export default function App() {
 				isEditing={isEditing}
 				handleYearStartChange={handleYearStartChange}
 				handleYearEndChange={handleYearEndChange}
-				handleCheckboxChange={handleCheckboxChange}
 				handleCompanyTitleChange={handleCompanyTitleChange}
 				handleCompanyNameChange={handleCompanyNameChange}
 				handleCompanyCityChange={handleCompanyCityChange}
