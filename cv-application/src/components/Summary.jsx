@@ -11,7 +11,7 @@ export default function Summary({person, isEditing}) {
 						id='statement'
 						cols='40'
 						rows='10'
-						placeholder={person.statement}
+						value={person.statement}
 					></textarea>
 				</p>
 			</section>

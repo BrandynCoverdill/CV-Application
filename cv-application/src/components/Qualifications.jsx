@@ -1,7 +1,6 @@
 import '../styles/Qualifications.css';
-import Button from './Button';
 
-export default function Qualifications({ person, isEditing }) {
+export default function Qualifications({person, isEditing}) {
 	if (isEditing) {
 		return (
 			<section className='qualificationsEdit'>
@@ -9,8 +8,8 @@ export default function Qualifications({ person, isEditing }) {
 				<ul>
 					{person.qualifications.map((qualification) => {
 						return (
-							<div className='editList'>
-								<input type='text' placeholder='Qualification' />
+							<div className='editList' key={qualification.key}>
+								<input type='text' value={qualification.title} />
 								<button className='deleteBtn'>Delete</button>
 							</div>
 						);
@@ -25,7 +24,7 @@ export default function Qualifications({ person, isEditing }) {
 				<h2>Core Qualifications</h2>
 				<ul>
 					{person.qualifications.map((qualification) => {
-						return <li>{qualification}</li>;
+						return <li key={qualification.key}>{qualification.title}</li>;
 					})}
 				</ul>
 			</section>
