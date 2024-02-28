@@ -287,6 +287,182 @@ export default function App() {
 		setEditSchool([...updatedSchools]);
 	}
 
+	function handleYearStartChange(e, id) {
+		const year = e.target.value;
+		const updatedWork = editWork.filter((work) => {
+			if (work.key === id) {
+				work.startDate = year;
+				return work;
+			}
+			return work;
+		});
+		setEditWork([...updatedWork]);
+	}
+
+	function handleYearEndChange(e, id) {
+		let year = e.target.value;
+		if (document.querySelector('#currentlyWorking').hasAttribute('checked')) {
+			year = 'Current';
+		}
+		const updatedWork = editWork.filter((work) => {
+			if (work.key === id) {
+				work.endDate = year;
+				return work;
+			}
+			return work;
+		});
+		setEditWork([...updatedWork]);
+		console.log(editWork);
+	}
+
+	function handleCheckboxChange(isChecked, id) {
+		// TODO: Make the checkbox checked if end date is "current" is selected on initial render.
+		const currentYear = new Date().getFullYear();
+		const yearEndInput = document.querySelector('#yearEndedInput');
+		if (!isChecked) {
+			yearEndInput.setAttribute('disabled', 'true');
+			setEditWork(
+				editWork.filter((work) => {
+					if (work.key === id) {
+						work.endDate = 'Current';
+						return work;
+					}
+					return work;
+				})
+			);
+		} else {
+			yearEndInput.removeAttribute('disabled');
+			setEditWork(
+				editWork.filter((work) => {
+					if (work.key === id) {
+						work.endDate = currentYear;
+						return work;
+					}
+					return work;
+				})
+			);
+		}
+	}
+
+	function handleCompanyTitleChange(e, id) {
+		const title = e.target.value;
+		const updatedWork = editWork.filter((work) => {
+			if (work.key === id) {
+				work.companyTitle = title;
+				return work;
+			}
+			return work;
+		});
+		setEditWork([...updatedWork]);
+	}
+
+	function handleCompanyNameChange(e, id) {
+		const name = e.target.value;
+		const updatedWork = editWork.filter((work) => {
+			if (work.key === id) {
+				work.companyName = name;
+				return work;
+			}
+			return work;
+		});
+		setEditWork([...updatedWork]);
+	}
+
+	function handleCompanyCityChange(e, id) {
+		const city = e.target.value;
+		const updatedWork = editWork.filter((work) => {
+			if (work.key === id) {
+				work.companyCity = city;
+				return work;
+			}
+			return work;
+		});
+		setEditWork([...updatedWork]);
+	}
+
+	function handleCompanyStateChange(e, id) {
+		const state = e.target.value;
+		const updatedWork = editWork.filter((work) => {
+			if (work.key === id) {
+				work.companyState = state;
+				return work;
+			}
+			return work;
+		});
+		setEditWork([...updatedWork]);
+	}
+
+	function handleCompanyDutyChange(e, dutyId, workId) {
+		const duty = e.target.value;
+		const updatedCompanies = editWork.filter((work) => {
+			if (work.key === workId) {
+				work.duties.filter((d) => {
+					if (d.key === dutyId) {
+						d.title = duty;
+						return d;
+					}
+					return d;
+				});
+			}
+			return work;
+		});
+		setEditWork([...updatedCompanies]);
+	}
+
+	function handleDeleteJobDuty(e, dutyId) {
+		setEditWork((prevEditWork) => {
+			const updatedWork = prevEditWork.map((job) => {
+				return {
+					...job,
+					duties: job.duties.filter((duty) => duty.key !== dutyId),
+				};
+			});
+			return updatedWork;
+		});
+	}
+
+	function handleDeleteJob(e, id) {
+		const updatedJob = editWork.filter((work) => {
+			return work.key !== id;
+		});
+		console.log(updatedJob);
+		setEditWork([...updatedJob]);
+	}
+
+	function handleAddJobDuty(e, dutyId, workId) {
+		setEditWork((prevEditWork) => {
+			const updatedWork = prevEditWork.map((work) => {
+				return {
+					...work,
+					duties: [
+						...work.duties,
+						{
+							key: uuidv4(),
+							title: '',
+						},
+					],
+				};
+			});
+			return updatedWork;
+		});
+	}
+
+	function handleAddJob() {
+		setEditWork([
+			...editWork,
+			{
+				key: uuidv4(),
+				startDate: '',
+				endDate: '',
+				companyTitle: '',
+				companyName: '',
+				companyCity: '',
+				companyState: '',
+				duties: [],
+			},
+		]);
+	}
+
 	return (
 		<>
 			<Header
@@ -325,7 +501,23 @@ export default function App() {
 				handleAddSchool={handleAddSchool}
 				handleDeleteSchool={handleDeleteSchool}
 			/>
-			<Experience work={work} editWork={editWork} isEditing={isEditing} />
+			<Experience
+				work={work}
+				editWork={editWork}
+				isEditing={isEditing}
+				handleYearStartChange={handleYearStartChange}
+				handleYearEndChange={handleYearEndChange}
+				handleCheckboxChange={handleCheckboxChange}
+				handleCompanyTitleChange={handleCompanyTitleChange}
+				handleCompanyNameChange={handleCompanyNameChange}
+				handleCompanyCityChange={handleCompanyCityChange}
+				handleCompanyStateChange={handleCompanyStateChange}
+				handleCompanyDutyChange={handleCompanyDutyChange}
+				handleDeleteJobDuty={handleDeleteJobDuty}
+				handleDeleteJob={handleDeleteJob}
+				handleAddJobDuty={handleAddJobDuty}
+				handleAddJob={handleAddJob}
+			/>
 			<section className='buttons'>
 				{!isEditing ? (
 					<Button handleClick={handleEdit}>Edit</Button>

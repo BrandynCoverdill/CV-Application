@@ -2,8 +2,34 @@ import {Fragment} from 'react';
 import states from 'states-us';
 import '../styles/Experience.css';
 
-export default function Experience({work, editWork, isEditing}) {
-	const currentYear = new Date().getFullYear();
+export default function Experience({
+	work,
+	editWork,
+	isEditing,
+	handleYearStartChange,
+	handleYearEndChange,
+	handleCheckboxChange,
+	handleCompanyTitleChange,
+	handleCompanyNameChange,
+	handleCompanyCityChange,
+	handleCompanyStateChange,
+	handleCompanyDutyChange,
+	handleDeleteJobDuty,
+	handleDeleteJob,
+	handleAddJobDuty,
+	handleAddJob,
+}) {
+	function handleCurrentlyWorkChange(e, id) {
+		const btn = document.querySelector('input[type="checkbox"]');
+		const isChecked = btn.hasAttribute('checked');
+		if (!isChecked) {
+			btn.setAttribute('checked', 'true');
+		} else {
+			btn.removeAttribute('checked');
+		}
+		handleCheckboxChange(isChecked, e, id);
+	}
+
 	if (isEditing) {
 		return (
 			<section className='experienceEdit'>
@@ -16,10 +42,10 @@ export default function Experience({work, editWork, isEditing}) {
 								<input
 									type='number'
 									min='1900'
-									max={currentYear}
 									placeholder='2017'
 									id='yearStartedInput'
 									value={w.startDate}
+									onChange={(e) => handleYearStartChange(e, w.key)}
 								/>
 							</div>
 							<div>
@@ -29,36 +55,39 @@ export default function Experience({work, editWork, isEditing}) {
 										<input
 											type='number'
 											min={1900}
-											max={currentYear}
 											placeholder='2020'
 											id='yearEndedInput'
+											disabled
+											onChange={(e) => handleYearEndChange(e, w.key)}
 										/>
 										<input
 											type='checkbox'
 											id='currentlyWorking'
 											name='currentlyWorking'
 											value='Current'
-											checked
+											onChange={handleCurrentlyWorkChange}
 										/>
-										<label htmlFor='currentlyWorking'>
-											I currently work here
-										</label>
 									</>
 								) : (
 									<>
 										<input
 											type='number'
 											min={1900}
-											max={currentYear}
 											placeholder='2020'
 											id='yearEndedInput'
 											value={w.endDate}
+											onChange={(e) => handleYearEndChange(e, w.key)}
 										/>
-										<label htmlFor='currentlyWorking'>
-											I currently work here
-										</label>
+										<input
+											type='checkbox'
+											id='currentlyWorking'
+											name='currentlyWorking'
+											value='Current'
+											onChange={(e) => handleCurrentlyWorkChange(e, w.key)}
+										/>
 									</>
 								)}
+								<label htmlFor='currentlyWorking'>I currently work here</label>
 							</div>
 							<div>
 								<label htmlFor='companyTitleInput'>Title at Company: </label>
@@ -66,6 +95,7 @@ export default function Experience({work, editWork, isEditing}) {
 									type='text'
 									placeholder='Software Engineer'
 									value={w.companyTitle}
+									onChange={(e) => handleCompanyTitleChange(e, w.key)}
 								/>
 							</div>
 							<div>
@@ -75,6 +105,7 @@ export default function Experience({work, editWork, isEditing}) {
 									id='companyNameInput'
 									placeholder='Bing'
 									value={w.companyName}
+									onChange={(e) => handleCompanyNameChange(e, w.key)}
 								/>
 							</div>
 							<div>
@@ -84,8 +115,13 @@ export default function Experience({work, editWork, isEditing}) {
 									id='companyCityInput'
 									placeholder='Bellevue'
 									value={w.companyCity}
+									onChange={(e) => handleCompanyCityChange(e, w.key)}
 								/>
-								<select name='companyStateSelect' id='compantStateSelect'>
+								<select
+									name='companyStateSelect'
+									id='compantStateSelect'
+									onChange={(e) => handleCompanyStateChange(e, w.key)}
+								>
 									{states.map((state) => {
 										if (state.abbreviation === w.companyState) {
 											return (
@@ -119,8 +155,16 @@ export default function Experience({work, editWork, isEditing}) {
 														type='text'
 														placeholder='Maintain software functionality'
 														value={duty.title}
+														onChange={(e) =>
+															handleCompanyDutyChange(e, duty.key, w.key)
+														}
 													/>
-													<button type='button'>Delete Job Duty</button>
+													<button
+														type='button'
+														onClick={(e) => handleDeleteJobDuty(e, duty.key)}
+													>
+														Delete Job Duty
+													</button>
 												</li>
 											</Fragment>
 										);
@@ -128,14 +172,29 @@ export default function Experience({work, editWork, isEditing}) {
 								</ul>
 							</div>
 							<div>
-								<button type='button'>Add Job Duty</button>
+								<button
+									type='button'
+									onClick={(e) => handleAddJobDuty(e, w.key)}
+								>
+									Add Job Duty
+								</button>
 							</div>
-							<div className='buttons'>
-								<button type='button'>Add Job</button>
+							<div>
+								<button
+									type='button'
+									onClick={(e) => handleDeleteJob(e, w.key)}
+								>
+									Delete Job
+								</button>
 							</div>
 						</Fragment>
 					);
 				})}
+				<div className='buttons'>
+					<button type='button' onClick={handleAddJob}>
+						Add Job
+					</button>
+				</div>
 			</section>
 		);
 	} else {
