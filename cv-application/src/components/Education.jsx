@@ -2,12 +2,20 @@ import {Fragment} from 'react';
 import states from 'states-us';
 import '../styles/Education.css';
 
-export default function Education({school, isEditing}) {
+export default function Education({
+	school,
+	editSchool,
+	isEditing,
+	handleSubjectChange,
+	handleSchoolNameChange,
+	handleSchoolCityChange,
+	handleSchoolStateChange,
+}) {
 	if (isEditing) {
 		return (
 			<section className='educationEdit'>
 				<h2>Education</h2>
-				{school.map((s) => {
+				{editSchool.map((s) => {
 					return (
 						<Fragment key={s.key}>
 							<div>
@@ -17,6 +25,7 @@ export default function Education({school, isEditing}) {
 									id='schoolQualificationInput'
 									placeholder='Software Development'
 									value={s.qualification}
+									onChange={(e) => handleSubjectChange(e, s.key)}
 								/>
 							</div>
 							<div>
@@ -26,6 +35,7 @@ export default function Education({school, isEditing}) {
 									id='schoolNameInput'
 									placeholder='Stanford University'
 									value={s.schoolName}
+									onChange={(e) => handleSchoolNameChange(e, s.key)}
 								/>
 							</div>
 							<div>
@@ -35,8 +45,13 @@ export default function Education({school, isEditing}) {
 									id='schoolCityInput'
 									placeholder='Stanford'
 									value={s.schoolCity}
+									onChange={(e) => handleSchoolCityChange(e, s.key)}
 								/>
-								<select name='schoolStateSelect' id='schoolStateSelect'>
+								<select
+									name='schoolStateSelect'
+									id='schoolStateSelect'
+									onChange={(e) => handleSchoolStateChange(e, s.key)}
+								>
 									{states.map((state) => {
 										if (state.abbreviation === s.schoolState) {
 											return (

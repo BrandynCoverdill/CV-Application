@@ -2,13 +2,13 @@ import {Fragment} from 'react';
 import states from 'states-us';
 import '../styles/Experience.css';
 
-export default function Experience({work, isEditing}) {
+export default function Experience({work, editWork, isEditing}) {
 	const currentYear = new Date().getFullYear();
 	if (isEditing) {
 		return (
 			<section className='experienceEdit'>
 				<h2>Work Experience</h2>
-				{work.map((w) => {
+				{editWork.map((w) => {
 					return (
 						<Fragment key={w.key}>
 							<div>

@@ -127,25 +127,183 @@ export default function App() {
 
 	const [isEditing, setIsEditing] = useState(false);
 
+	const [editPerson, setEditPerson] = useState({...person});
+	const [editSchool, setEditSchool] = useState(structuredClone(school));
+	const [editWork, setEditWork] = useState(structuredClone(work));
+
 	function handleEdit(e) {
 		setIsEditing(true);
 	}
 
 	function handleSave(e) {
 		setIsEditing(false);
+		setPerson(structuredClone(editPerson));
+		setSchool(structuredClone(editSchool));
+		setWork(structuredClone(editWork));
 	}
 
 	function handleCancel(e) {
 		setIsEditing(false);
+		setEditPerson(structuredClone(person));
+		setEditSchool(structuredClone(school));
+		setEditWork(structuredClone(work));
+	}
+
+	function handleNameChange(e) {
+		const updatedName = e.target.value;
+		setEditPerson({...editPerson, name: updatedName});
+	}
+
+	function handleEmailChange(e) {
+		const updatedEmail = e.target.value;
+		setEditPerson({...editPerson, email: updatedEmail});
+	}
+
+	function handlePhoneChange(e) {
+		const updatedPhone = e.target.value;
+		setEditPerson({...editPerson, phone: updatedPhone});
+	}
+
+	function handleCityChange(e) {
+		const updatedCity = e.target.value;
+		setEditPerson({...editPerson, city: updatedCity});
+	}
+
+	function handleStateChange(e) {
+		const updatedState = e.target.value;
+		setEditPerson({...editPerson, state: updatedState});
+	}
+
+	function handleZipcodeChange(e) {
+		const updatedZip = e.target.value;
+		setEditPerson({...editPerson, zipcode: updatedZip});
+	}
+
+	function handleSummaryChange(e) {
+		const updatedSummary = e.target.value;
+		setEditPerson({...editPerson, statement: updatedSummary});
+	}
+
+	function deleteQualification(id) {
+		const updatedQualifications = editPerson.qualifications.filter(
+			(qualification) => {
+				return qualification.key !== id;
+			}
+		);
+		setEditPerson({...editPerson, qualifications: updatedQualifications});
+	}
+
+	function updateQualification(e, id) {
+		const updatedQualifications = editPerson.qualifications.filter(
+			(qualification) => {
+				if (qualification.key === id) {
+					qualification.title = e.target.value;
+					return qualification;
+				}
+				return qualification;
+			}
+		);
+		setEditPerson({...editPerson, qualifications: updatedQualifications});
+	}
+
+	function addQualification(e) {
+		setEditPerson({
+			...editPerson,
+			qualifications: [
+				...editPerson.qualifications,
+				{
+					key: uuidv4(),
+					title: '',
+				},
+			],
+		});
+	}
+
+	function handleSubjectChange(e, id) {
+		const subject = e.target.value;
+		const updatedSchools = editSchool.filter((school) => {
+			if (school.key === id) {
+				school.qualification = subject;
+				return school;
+			}
+			return school;
+		});
+		setEditSchool([...updatedSchools]);
+	}
+
+	function handleSchoolNameChange(e, id) {
+		const name = e.target.value;
+		const updatedSchools = editSchool.filter((school) => {
+			if (school.key === id) {
+				school.schoolName = name;
+				return school;
+			}
+			return school;
+		});
+		setEditSchool([...updatedSchools]);
+	}
+
+	function handleSchoolCityChange(e, id) {
+		const city = e.target.value;
+		const updatedSchools = editSchool.filter((school) => {
+			if (school.key === id) {
+				school.schoolCity = city;
+				return school;
+			}
+			return school;
+		});
+		setEditSchool([...updatedSchools]);
+	}
+
+	function handleSchoolStateChange(e, id) {
+		const state = e.target.value;
+		const updatedSchools = editSchool.filter((school) => {
+			if (school.key === id) {
+				school.schoolState = state;
+				return school;
+			}
+			return school;
+		});
+		setEditSchool([...updatedSchools]);
 	}
 
 	return (
 		<>
-			<Header person={person} isEditing={isEditing} />
-			<Summary person={person} isEditing={isEditing} />
-			<Qualifications person={person} isEditing={isEditing} />
-			<Education school={school} isEditing={isEditing} />
-			<Experience work={work} isEditing={isEditing} />
+			<Header
+				person={person}
+				editPerson={editPerson}
+				isEditing={isEditing}
+				handleNameChange={handleNameChange}
+				handleEmailChange={handleEmailChange}
+				handlePhoneChange={handlePhoneChange}
+				handleCityChange={handleCityChange}
+				handleStateChange={handleStateChange}
+				handleZipcodeChange={handleZipcodeChange}
+			/>
+			<Summary
+				person={person}
+				editPerson={editPerson}
+				isEditing={isEditing}
+				handleSummaryChange={handleSummaryChange}
+			/>
+			<Qualifications
+				person={person}
+				editPerson={editPerson}
+				isEditing={isEditing}
+				deleteQualification={deleteQualification}
+				updateQualification={updateQualification}
+				addQualification={addQualification}
+			/>
+			<Education
+				school={school}
+				editSchool={editSchool}
+				isEditing={isEditing}
+				handleSubjectChange={handleSubjectChange}
+				handleSchoolNameChange={handleSchoolNameChange}
+				handleSchoolCityChange={handleSchoolCityChange}
+				handleSchoolStateChange={handleSchoolStateChange}
+			/>
+			<Experience work={work} editWork={editWork} isEditing={isEditing} />
 			<section className='buttons'>
 				{!isEditing ? (
 					<Button handleClick={handleEdit}>Edit</Button>

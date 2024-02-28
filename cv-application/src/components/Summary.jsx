@@ -1,6 +1,11 @@
 import '../styles/Summary.css';
 
-export default function Summary({person, isEditing}) {
+export default function Summary({
+	person,
+	editPerson,
+	isEditing,
+	handleSummaryChange,
+}) {
 	if (isEditing) {
 		return (
 			<section className='summaryEdit'>
@@ -11,7 +16,8 @@ export default function Summary({person, isEditing}) {
 						id='statement'
 						cols='40'
 						rows='10'
-						value={person.statement}
+						value={editPerson.statement}
+						onChange={handleSummaryChange}
 					></textarea>
 				</p>
 			</section>

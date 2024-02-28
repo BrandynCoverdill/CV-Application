@@ -1,7 +1,6 @@
 .summary {
 	display: flex;
 	flex-wrap: nowrap;
-	justify-content: center;
 	gap: 1em;
 	margin-top: 0.5em;
 	padding-block-end: 0.5em;

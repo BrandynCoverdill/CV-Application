@@ -1,7 +1,17 @@
 import '../styles/Header.css';
 import states from 'states-us';
 
-export default function Header({person, isEditing}) {
+export default function Header({
+	person,
+	editPerson,
+	isEditing,
+	handleNameChange,
+	handleEmailChange,
+	handlePhoneChange,
+	handleCityChange,
+	handleStateChange,
+	handleZipcodeChange,
+}) {
 	if (isEditing) {
 		return (
 			<section className='headerEdit'>
@@ -13,7 +23,8 @@ export default function Header({person, isEditing}) {
 							type='text'
 							id='nameInput'
 							placeholder='Everett Smith'
-							value={person.name}
+							value={editPerson.name}
+							onChange={handleNameChange}
 						/>
 					</div>
 					<div>
@@ -22,7 +33,8 @@ export default function Header({person, isEditing}) {
 							type='text'
 							id='emailInput'
 							placeholder='everettsmith@email.com'
-							value={person.email}
+							value={editPerson.email}
+							onChange={handleEmailChange}
 						/>
 					</div>
 					<div>
@@ -31,7 +43,8 @@ export default function Header({person, isEditing}) {
 							type='text'
 							id='phoneInput'
 							placeholder='123-456-7890'
-							value={person.phone}
+							value={editPerson.phone}
+							onChange={handlePhoneChange}
 						/>
 					</div>
 					<div>
@@ -40,11 +53,16 @@ export default function Header({person, isEditing}) {
 							type='text'
 							id='personCityInput'
 							placeholder='City'
-							value={person.city}
+							value={editPerson.city}
+							onChange={handleCityChange}
 						/>
-						<select name='personStateSelect' id='personStateSelect'>
+						<select
+							name='personStateSelect'
+							id='personStateSelect'
+							onChange={handleStateChange}
+						>
 							{states.map((state) => {
-								if (person.state === state.abbreviation) {
+								if (editPerson.state === state.abbreviation) {
 									return (
 										<option
 											key={state.abbreviation}
@@ -56,7 +74,7 @@ export default function Header({person, isEditing}) {
 									);
 								}
 								return (
-									<option key={state.abbreviation} value={state}>
+									<option key={state.abbreviation} value={state.abbreviation}>
 										{state.abbreviation}
 									</option>
 								);
@@ -69,7 +87,8 @@ export default function Header({person, isEditing}) {
 							type='text'
 							id='personZip'
 							placeholder='12345'
-							value={person.zipcode}
+							value={editPerson.zipcode}
+							onChange={handleZipcodeChange}
 						/>
 					</div>
 				</div>
