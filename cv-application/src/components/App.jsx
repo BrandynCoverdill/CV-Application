@@ -267,6 +267,26 @@ export default function App() {
 		setEditSchool([...updatedSchools]);
 	}
 
+	function handleAddSchool(e) {
+		setEditSchool([
+			...editSchool,
+			{
+				key: uuidv4(),
+				qualification: '',
+				schoolName: '',
+				schoolCity: '',
+				schoolState: 'AL',
+			},
+		]);
+	}
+
+	function handleDeleteSchool(e, id) {
+		const updatedSchools = editSchool.filter((school) => {
+			return school.key !== id;
+		});
+		setEditSchool([...updatedSchools]);
+	}
+
 	return (
 		<>
 			<Header
@@ -302,6 +322,8 @@ export default function App() {
 				handleSchoolNameChange={handleSchoolNameChange}
 				handleSchoolCityChange={handleSchoolCityChange}
 				handleSchoolStateChange={handleSchoolStateChange}
+				handleAddSchool={handleAddSchool}
+				handleDeleteSchool={handleDeleteSchool}
 			/>
 			<Experience work={work} editWork={editWork} isEditing={isEditing} />
 			<section className='buttons'>

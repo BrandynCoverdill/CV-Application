@@ -10,6 +10,8 @@ export default function Education({
 	handleSchoolNameChange,
 	handleSchoolCityChange,
 	handleSchoolStateChange,
+	handleAddSchool,
+	handleDeleteSchool,
 }) {
 	if (isEditing) {
 		return (
@@ -75,13 +77,17 @@ export default function Education({
 									})}
 								</select>
 							</div>
-							<button type='button' className='deleteSchoolBtn'>
+							<button
+								type='button'
+								className='deleteSchoolBtn'
+								onClick={(e) => handleDeleteSchool(e, s.key)}
+							>
 								Delete School
 							</button>
 						</Fragment>
 					);
 				})}
-				<div className='buttons'>
+				<div className='buttons' onClick={handleAddSchool}>
 					<button type='button'>Add School</button>
 				</div>
 			</section>
@@ -90,16 +96,18 @@ export default function Education({
 		return (
 			<section className='education'>
 				<h2>Education</h2>
-				{school.map((s) => {
-					return (
-						<div key={s.key}>
-							<p>
-								<b>{s.qualification}</b> - {s.schoolName}
-							</p>
-							<p>{s.schoolCity + ', ' + s.schoolState}</p>
-						</div>
-					);
-				})}
+				<div className='schoolList'>
+					{school.map((s) => {
+						return (
+							<div key={s.key}>
+								<p>
+									<b>{s.qualification}</b> - {s.schoolName}
+								</p>
+								<p>{s.schoolCity + ', ' + s.schoolState}</p>
+							</div>
+						);
+					})}
+				</div>
 			</section>
 		);
 	}

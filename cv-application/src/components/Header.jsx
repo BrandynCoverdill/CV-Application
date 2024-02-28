@@ -92,25 +92,6 @@ export default function Header({
 						/>
 					</div>
 				</div>
-				{/* <div className='header-edit'>
-					<div className='border'>
-						<p>
-							<label htmlFor='personStateSelect'>State:</label>
-							<select name='state' id='personStateSelect'>
-								{states.map((state) => {
-									return (
-										<option value={state.abbreviation} key={state.abbreviation}>
-											{state.abbreviation}
-										</option>
-									);
-								})}
-							</select>
-							<br />
-							<label htmlFor='zipInput'>Zipcode:</label>
-							<input id='zipInput' type='text' placeholder={person.zipcode} />
-						</p>
-					</div>
-				</div> */}
 			</section>
 		);
 	} else {
