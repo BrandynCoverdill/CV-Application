@@ -1,16 +1,17 @@
 import '../styles/Summary.css';
 
-export default function Summary({ person, isEditing }) {
+export default function Summary({person, isEditing}) {
 	if (isEditing) {
 		return (
-			<section className='summary'>
+			<section className='summaryEdit'>
 				<h2>Summary Statement</h2>
 				<p>
 					<textarea
 						name='statement'
 						id='statement'
-						cols='50'
-						rows='5'
+						cols='40'
+						rows='10'
+						placeholder={person.statement}
 					></textarea>
 				</p>
 			</section>
