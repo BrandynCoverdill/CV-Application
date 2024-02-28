@@ -24,6 +24,7 @@ module.exports = {
 			rules: {
 				'no-unused-vars': 'warn',
 				'react/prop-types': 'warn',
+				'react/jsx-key': 'warn',
 			},
 		},
 	],

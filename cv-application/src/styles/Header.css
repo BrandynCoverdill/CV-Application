@@ -15,14 +15,22 @@
 	padding-block: 0.5em;
 }
 
-.border {
+.headerEdit .border {
 	border-bottom: 3px solid black;
 	padding-bottom: 0.5em;
-	width: 100%;
 }
 
-.header #nameInput {
-	width: 100%;
+.headerEdit div {
+	margin-bottom: 0.5em;
+}
+
+.headerEdit div label {
+	color: red;
+	margin-right: 0.25em;
+}
+
+.headerEdit div select {
+	margin-left: 0.25em;
 }
 
 @media screen and (max-width: 350px) {
@@ -37,12 +45,6 @@
 }
 
 @media screen and (max-width: 450px) {
-	.header-edit {
-		display: flex;
-		flex-direction: column;
-		text-align: center;
-	}
-
 	.header input {
 		margin: 0.1em;
 	}
