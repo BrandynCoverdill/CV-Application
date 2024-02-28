@@ -18,4 +18,13 @@ module.exports = {
 			{allowConstantExport: true},
 		],
 	},
+	overrides: [
+		{
+			files: ['*.jsx'],
+			rules: {
+				'no-unused-vars': 'warn',
+				'react/prop-types': 'warn',
+			},
+		},
+	],
 };

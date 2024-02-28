@@ -1,7 +1,7 @@
 import '../styles/Header.css';
 import states from 'states-us';
 
-export default function Header({ person, isEditing }) {
+export default function Header({person, isEditing}) {
 	if (isEditing) {
 		return (
 			<section className='header'>
