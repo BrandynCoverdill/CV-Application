@@ -1,12 +1,14 @@
 import '../styles/App.css';
-import {v4 as uuidv4} from 'uuid';
-import {useState} from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import { Fragment, useState } from 'react';
 import Header from './Header';
 import Summary from './Summary';
 import Qualifications from './Qualifications';
 import Education from './Education';
 import Experience from './Experience';
 import Button from './Button';
+import { useContext } from 'react';
+import { DarkModeContext } from '../context/DarkModeContext';
 
 export default function App() {
 	const [person, setPerson] = useState({
@@ -127,9 +129,11 @@ export default function App() {
 
 	const [isEditing, setIsEditing] = useState(false);
 
-	const [editPerson, setEditPerson] = useState({...person});
+	const [editPerson, setEditPerson] = useState({ ...person });
 	const [editSchool, setEditSchool] = useState(structuredClone(school));
 	const [editWork, setEditWork] = useState(structuredClone(work));
+
+	const { darkMode, toggleDarkMode } = useContext(DarkModeContext);
 
 	function handleEdit(e) {
 		setIsEditing(true);
@@ -151,37 +155,37 @@ export default function App() {
 
 	function handleNameChange(e) {
 		const updatedName = e.target.value;
-		setEditPerson({...editPerson, name: updatedName});
+		setEditPerson({ ...editPerson, name: updatedName });
 	}
 
 	function handleEmailChange(e) {
 		const updatedEmail = e.target.value;
-		setEditPerson({...editPerson, email: updatedEmail});
+		setEditPerson({ ...editPerson, email: updatedEmail });
 	}
 
 	function handlePhoneChange(e) {
 		const updatedPhone = e.target.value;
-		setEditPerson({...editPerson, phone: updatedPhone});
+		setEditPerson({ ...editPerson, phone: updatedPhone });
 	}
 
 	function handleCityChange(e) {
 		const updatedCity = e.target.value;
-		setEditPerson({...editPerson, city: updatedCity});
+		setEditPerson({ ...editPerson, city: updatedCity });
 	}
 
 	function handleStateChange(e) {
 		const updatedState = e.target.value;
-		setEditPerson({...editPerson, state: updatedState});
+		setEditPerson({ ...editPerson, state: updatedState });
 	}
 
 	function handleZipcodeChange(e) {
 		const updatedZip = e.target.value;
-		setEditPerson({...editPerson, zipcode: updatedZip});
+		setEditPerson({ ...editPerson, zipcode: updatedZip });
 	}
 
 	function handleSummaryChange(e) {
 		const updatedSummary = e.target.value;
-		setEditPerson({...editPerson, statement: updatedSummary});
+		setEditPerson({ ...editPerson, statement: updatedSummary });
 	}
 
 	function deleteQualification(id) {
@@ -190,7 +194,7 @@ export default function App() {
 				return qualification.key !== id;
 			}
 		);
-		setEditPerson({...editPerson, qualifications: updatedQualifications});
+		setEditPerson({ ...editPerson, qualifications: updatedQualifications });
 	}
 
 	function updateQualification(e, id) {
@@ -203,7 +207,7 @@ export default function App() {
 				return qualification;
 			}
 		);
-		setEditPerson({...editPerson, qualifications: updatedQualifications});
+		setEditPerson({ ...editPerson, qualifications: updatedQualifications });
 	}
 
 	function addQualification(e) {
@@ -430,8 +434,17 @@ export default function App() {
 		]);
 	}
 
+	function toggleThemes() {
+		toggleDarkMode();
+	}
+
 	return (
-		<>
+		<div className={darkMode ? 'app dark-mode' : 'app light-mode'}>
+			<div className='toggleThemeBtn'>
+				<Button type='button' handleClick={toggleThemes}>
+					{darkMode ? 'Light Mode' : 'Dark Mode'}
+				</Button>
+			</div>
 			<Header
 				person={person}
 				editPerson={editPerson}
@@ -494,6 +507,6 @@ export default function App() {
 					</>
 				)}
 			</section>
-		</>
+		</div>
 	);
 }

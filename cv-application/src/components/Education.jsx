@@ -1,4 +1,4 @@
-import {Fragment} from 'react';
+import { Fragment } from 'react';
 import states from 'states-us';
 import '../styles/Education.css';
 

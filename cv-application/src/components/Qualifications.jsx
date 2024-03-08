@@ -1,4 +1,4 @@
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import '../styles/Qualifications.css';
 
 export default function Qualifications({
